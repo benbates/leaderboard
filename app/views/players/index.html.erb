@@ -3,14 +3,17 @@
 <table>
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Points For</th>
   </tr>
 
 <% @players.each do |player| %>
   <tr>
     <td><%= player.name %></td>
+  	<td><%= player.results.count(:conditions => {:winner => true})%></td>
+  	<td><%= player.results.count(:conditions => {:winner => false})%></td>
+  	<td><%= player.results.sum(:score)%></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
     <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>

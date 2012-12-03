@@ -1,4 +1,6 @@
 Leaderboard::Application.routes.draw do
+  resources :game_types
+
   resources :results
 
   resources :games

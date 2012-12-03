@@ -3,6 +3,12 @@
 <p>
   <b>Name:</b>
   <%= @player.name %>
+  <b>Wins:</b>
+  <%= @player.results.count(:conditions => {:winner => true})%>
+  <b>Losses:</b>
+  <%= @player.results.count(:conditions => {:winner => false})%>
+  <b>Points for:</b>
+  <%= @player.results.sum(:score)%>
 </p>
 
 

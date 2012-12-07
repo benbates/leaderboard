@@ -1,4 +1,4 @@
-<h1>Listing players</h1>
+<h1>Leaderboard</h1>
 
 <table>
   <tr>
@@ -16,7 +16,7 @@
   	<td><%= player.results.count(:conditions => {:winner => true}) %></td>
   	<td><%= player.results.count(:conditions => {:winner => false}) %></td>
   	<td><%= player.results.sum(:score) %></td>
-  	<td><%= points_against(player) %></td>
+  	<td><%= player.points_against %></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
     <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>

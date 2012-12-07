@@ -15,7 +15,7 @@
     <td><%= player.name %></td>
   	<td><%= player.results.count(:conditions => {:winner => true}) %></td>
   	<td><%= player.results.count(:conditions => {:winner => false}) %></td>
-  	<td><%= player.results.sum(:score) %></td>
+  	<td><%= player.points_for %></td>
   	<td><%= player.points_against %></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201212638) do
+ActiveRecord::Schema.define(:version => 20121211022521) do
 
   create_table "game_types", :force => true do |t|
     t.string   "name"
@@ -28,17 +28,12 @@ ActiveRecord::Schema.define(:version => 20121201212638) do
 
   create_table "players", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "win_count",  :default => 0
   end
 
-  create_table "results", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "game_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "winner"
-    t.integer  "score"
-  end
+# Could not dump table "results" because of following StandardError
+#   Unknown type 'id' for column 'opponent_id'
 
 end

@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :name, :points_against
+  attr_accessible :name, :points_against, :win_count
   
   validates :name, presence: true 
   
@@ -11,15 +11,7 @@ class Player < ActiveRecord::Base
   end
   
   def points_against
-    score = 0
-    self.games.each do |game|
-      game.results.each do |result|
-        if result.player_id != self.id 
-          score = score +result.score
-        end
-      end
-    end
-    score
+    Result.sum(:score, :conditions => { :opponent_id => self.id })
   end
   
 end

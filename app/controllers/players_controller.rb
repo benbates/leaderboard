@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
+    @players = Player.all(:order => 'win_count DESC', :limit => 20)
 
     respond_to do |format|
       format.html # index.html.erb

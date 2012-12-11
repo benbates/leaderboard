@@ -5,5 +5,6 @@ class Game < ActiveRecord::Base
   
 	has_many :players, :through => :results
 	has_many :results, :dependent => :destroy
+  accepts_nested_attributes_for :results
 	belongs_to :game_type
 end

@@ -12,8 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :game_type_id %><br />
-    <%= f.number_field :game_type_id %>
+  	<%= fields_for :results do |d| %>
+  		<table class="table">
+		<tr>
+			<td><%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %></td>
+			<td><%= d.number_field :player_one_score%></td>
+		</tr>
+		<tr>
+			<td><%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %></td>
+			<td><%= d.number_field :player_two_score%></td>	
+		</tr>
+		</table>
+	<% end %>
+    <%= f.hidden_field :game_type_id, :value => 1 %>
   </div>
   <div class="actions">
     <%= f.submit %>

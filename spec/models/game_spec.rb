@@ -6,7 +6,8 @@ describe Game do
   subject { game }
 
   it { should respond_to(:game_type_id) }
-
+  it { should respond_to(:player) }
+  it { should respond_to(:result) }
   it { should be_valid }
 
   describe "when game_type_id is not present" do

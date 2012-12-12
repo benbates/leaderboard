@@ -16,11 +16,11 @@
   		<table class="table">
 		<tr>
 			<td><%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %></td>
-			<td><%= d.number_field :player_one_score%></td>
+			<td><%= d.number_field :player_one_score %></td>
 		</tr>
 		<tr>
 			<td><%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %></td>
-			<td><%= d.number_field :player_two_score%></td>	
+			<td><%= d.number_field :player_two_score %></td>	
 		</tr>
 		</table>
 	<% end %>

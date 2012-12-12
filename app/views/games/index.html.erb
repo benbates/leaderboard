@@ -1,20 +1,20 @@
-<h1>Listing games</h1>
-
-<table>
-  <tr>
-    <th>Type</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>All games</h1>
 
 <% @games.each do |game| %>
-  <tr>
-    <td><%= game.game_type.name %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if game.created_at.strftime("%m/%d/%Y") != @date %>
+  <% @date = game.created_at.strftime("%m/%d/%Y") %>
+  <%= @date %>
+<% end %>
+
+<table class="table">
+  <% game.players.each do |player|%>
+    <tr>
+     <td><%= link_to player.name, player %></td>
+     <% result = player.results.first(:conditions => { :game_id => game.id }) %>
+     <td><%= result.score %></td>     
+   </tr>
+   <% end %>
+   </table>
 <% end %>
 </table>
 

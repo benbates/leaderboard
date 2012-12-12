@@ -2,7 +2,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @date = ""
+    @games = Game.order("created_at desc").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,10 +41,12 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(params[:game])
+    @game = Game.new(params[:game])  
 
     respond_to do |format|
       if @game.save
+        @game.results.create! player_id: params[:player_one], winner: true, score: params[:results][:player_one_score], opponent_id: params[:player_two]
+        @game.results.create! player_id: params[:player_two], winner: false, score: params[:results][:player_two_score], opponent_id: params[:player_one]
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render json: @game, status: :created, location: @game }
       else

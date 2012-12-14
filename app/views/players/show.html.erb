@@ -1,17 +1,40 @@
 <p id="notice"><%= notice %></p>
+<h1><%= @player.name %></h1>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Points For</th>
+      <th>Points Against</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center"><%= @player.win_count %></td>
+      <td class="center"><%= @player.results.count(:conditions => {:winner => false}) %></td>
+      <td class="center"><%= @player.points_for %></td>
+      <td class="center"><%= @player.points_against %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <b>Name:</b>
-  <%= @player.name %>
-  <b>Wins:</b>
-  <%= @player.results.count(:conditions => {:winner => true})%>
-  <b>Losses:</b>
-  <%= @player.results.count(:conditions => {:winner => false})%>
-  <b>Points for:</b>
-  <%= @player.results.sum(:score)%>
-</p>
-
+<% @games.each do |game| %>
+  <% if game.created_at.strftime("%m/%d/%Y") != @date %>
+    <% @date = game.created_at.strftime("%m/%d/%Y") %>
+    <h2><%= @date %></h2>
+  <% end %>
+  <table class="table table-striped table-bordered">
+    <% game.players.each do |player|%>
+      <tr>
+        <td><%= link_to player.name, player %></td>
+        <% result = player.results.first(:conditions => { :game_id => game.id }) %>
+        <td><%= result.score %></td>     
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 
 <%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+<%= link_to 'Destroy', @player, method: :delete, data: { confirm: 'Are you sure?' } %> | 
 <%= link_to 'Back', players_path %>

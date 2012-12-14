@@ -13,14 +13,20 @@
 
   <div class="field">
   	<%= fields_for :results do |d| %>
-  		<table class="table">
+    <table class="table">
+      <tr>
+      <th>Player</th>
+      <th>Score</th>
+      <th>Winner</th>
 		<tr>
 			<td><%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %></td>
 			<td><%= d.number_field :player_one_score %></td>
+			<td><%= d.check_box :player_one_winner %></td>
 		</tr>
 		<tr>
 			<td><%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %></td>
 			<td><%= d.number_field :player_two_score %></td>	
+			<td><%= d.check_box :player_two_winner %></td>
 		</tr>
 		</table>
 	<% end %>

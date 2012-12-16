@@ -14,7 +14,7 @@
   <div class="field">
   	<%= fields_for :results do |d| %>
     <table class="table">
-      <tr>
+    <tr>
       <th>Player</th>
       <th>Score</th>
       <th>Winner</th>
@@ -28,9 +28,16 @@
 			<td><%= d.number_field :player_two_score %></td>	
 			<td><%= d.check_box :player_two_winner %></td>
 		</tr>
+		<tr>
+		  <th>Comment</th>
+		  <th>Game Type</th>
+		</tr>
+		<tr>
+		  <td class="span9"><%= f.text_field :comment %></td>
+		  <td><%= f.select :game_type_id, options_from_collection_for_select(GameType.all, :id, :name) %></td>
+		</tr>
 		</table>
 	<% end %>
-    <%= f.hidden_field :game_type_id, :value => 1 %>
   </div>
   <div class="actions">
     <%= f.submit %>

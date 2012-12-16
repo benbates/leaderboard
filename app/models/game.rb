@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  attr_accessible :game_type_id, :date
+  attr_accessible :game_type_id, :date, :comment
   
   validates :game_type_id, presence: true 
   

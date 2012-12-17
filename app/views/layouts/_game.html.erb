@@ -1,3 +1,4 @@
+<% @date = "" %>
 <% @games.each do |game| %>
   <% if game.created_at.strftime("%m/%d/%Y") != @date %>
     <% @date = game.created_at.strftime("%m/%d/%Y") %>

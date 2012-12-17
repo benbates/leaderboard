@@ -33,7 +33,7 @@
 		  <th>Game Type</th>
 		</tr>
 		<tr>
-		  <td class="span9"><%= f.text_field :comment %></td>
+		  <td class="span9"><%= f.text_area :comment, :size => "120x2" %></td>
 		  <td><%= f.select :game_type_id, options_from_collection_for_select(GameType.all, :id, :name) %></td>
 		</tr>
 		</table>

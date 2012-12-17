@@ -41,17 +41,17 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @errors = []
+    @game = Game.new(params[:game])  
+    @game.errors = []
     if params[:player_one] == params[:player_two]
-      @errors.push("Players must be different")
+      @game.errors.push("Players must be different")
     end
     if params[:results][:player_one_winner] == params[:results][:player_two_winner]
-      @errors.push("Please select a winner")
+      @game.errors.push("Please select a winner")
     end
-      @game = Game.new(params[:game])  
 
       respond_to do |format|
-        if @game.save
+        if @game.save && @game.errors == []
           @game.results.create! player_id: params[:player_one], winner: params[:results][:player_one_winner], score: params[:results][:player_one_score], opponent_id: params[:player_two]
           @game.results.create! player_id: params[:player_two], winner: params[:results][:player_two_winner], score: params[:results][:player_two_score], opponent_id: params[:player_one]
           format.html { redirect_to games_path, notice: 'Game successfully created.' }

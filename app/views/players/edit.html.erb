@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
+<%= link_to 'Destroy', @player, method: :delete, data: { confirm: 'Are you sure?' } %> | 
 <%= link_to 'Show', @player %> |
 <%= link_to 'Back', players_path %>

@@ -1,13 +1,8 @@
 <h1>Games</h1>
 
-<ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-  <% GameType.all.each do | game_type | %>
-    <li><a href="#<%= game_type.name %>" data-toggle="tab"><%= game_type.name %></a></li>
-  <% end %>
-</ul>
+<%= render 'layouts/game_type_tabs' %>
 <div class="tab-content">
-  <div class="tab-pane active" id="all"><%= render 'layouts/game' %></div>
+  <div class="tab-pane active" id="All"><%= render 'layouts/game' %></div>
   <% GameType.all.each do | game_type | %>
     <% @games = game_type.games.order("created_at desc") %>
     <div class="tab-pane" id="<%= game_type.name %>"><%= render 'layouts/game' %></div>

@@ -44,7 +44,7 @@ class GameTypesController < ApplicationController
 
     respond_to do |format|
       if @game_type.save
-        format.html { redirect_to @game_type, notice: 'Game type was successfully created.' }
+        format.html { redirect_to '/games/new', notice: 'Game type was successfully created.' }
         format.json { render json: @game_type, status: :created, location: @game_type }
       else
         format.html { render action: "new" }

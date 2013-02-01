@@ -20,7 +20,7 @@
       <td><%= link_to player.name, player %></td>
   	  <td class="center"><%= player.win_count %></td>
   	  <td class="center"><%= player.results.count(:conditions => {:winner => false}) %></td>
-  	  <td class="center"><%= player.games.count > 0 ? number_with_precision(player.win_count.to_f/(player.results.count(:conditions => {:winner => false}) + player.win_count), :precision => 3) : '0.000' %></td>
+  	  <td class="center"><%= number_with_precision(player.win_percent, :precision => 3) %></td>
   	  <td class="center"><%= player.points_for %></td>
   	  <td class="center"><%= player.points_against %></td>
     </tr>

@@ -11,33 +11,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-  	<%= fields_for :results do |d| %>
-    <table class="table">
-    <tr>
-      <th>Player</th>
-      <th>Score</th>
-      <th>Winner</th>
-		<tr>
-			<td><%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %></td>
-			<td><%= d.number_field :player_one_score %></td>
-			<td><%= d.check_box :player_one_winner %></td>
-		</tr>
-		<tr>
-			<td><%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %></td>
-			<td><%= d.number_field :player_two_score %></td>	
-			<td><%= d.check_box :player_two_winner %></td>
-		</tr>
-		<tr>
-		  <th>Comment</th>
-		  <th>Game Type</th>
-		</tr>
-		<tr>
-		  <td class="span9"><%= f.text_area :comment, :size => "120x2" %></td>
-		  <td><%= f.select :game_type_id, options_from_collection_for_select(GameType.all, :id, :name) %></td>
-		</tr>
-		</table>
-	<% end %>
+  <%= fields_for :results do |d| %>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="row-fluid">
+          <div class="span6">
+            Player
+            <div class="row-fluid">
+              <%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %>
+            </div>
+            <div class="row-fluid">
+              <%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %>
+            </div>
+          </div>
+          <div class="span4">
+            Score
+            <div class="row-fluid">
+              <%= d.number_field :player_one_score %>
+            </div>
+            <div class="row-fluid">
+              <%= d.number_field :player_two_score %>
+            </div>
+          </div>  
+          <div class="span2">
+            Winner
+            <div class="row-fluid">
+              <%= d.check_box :player_one_winner %>
+            </div>
+            <div class="row-fluid">
+              <%= d.check_box :player_one_winner %>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span9">
+            Comments
+            <div class="row-fluid">
+              <%= f.text_area :comment, :size => "120x2" %>
+            </div>            
+          </div>        
+           <div class="span3">
+            Game Type
+            <div class="row-fluid">
+              <%= f.select :game_type_id, options_from_collection_for_select(GameType.all, :id, :name) %>
+            </div>            
+          </div>        
+      </div>
+    </div>
+   <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,5 +1,8 @@
 == To do
 * Tests!
 * Validate new game creation
+** Must include one and only one winner
+** If you don't enter a score, assume 0
+** Must include 2 different people
 * Filter games by game type
 * Fiter games by date - (last week, last month)

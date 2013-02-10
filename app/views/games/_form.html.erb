@@ -15,7 +15,7 @@
     <div class="row-fluid">
       <div class="span12">
         <div class="row-fluid">
-          <div class="span6">
+          <div class="span3">
             Player
             <div class="row-fluid">
               <%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %>
@@ -24,7 +24,7 @@
               <%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %>
             </div>
           </div>
-          <div class="span4">
+          <div class="span3">
             Score
             <div class="row-fluid">
               <%= d.number_field :player_one_score %>
@@ -33,7 +33,7 @@
               <%= d.number_field :player_two_score %>
             </div>
           </div>  
-          <div class="span2">
+          <div class="span1">
             Winner
             <div class="row-fluid">
               <%= d.check_box :player_one_winner %>
@@ -42,18 +42,18 @@
               <%= d.check_box :player_one_winner %>
             </div>
           </div>
-        </div>
-        <div class="row-fluid">
-          <div class="span9">
-            Comments
-            <div class="row-fluid">
-              <%= f.text_area :comment, :size => "120x2" %>
-            </div>            
-          </div>        
            <div class="span3">
             Game Type
             <div class="row-fluid">
               <%= f.select :game_type_id, options_from_collection_for_select(GameType.all, :id, :name) %>
+            </div>            
+          </div> 
+        </div>
+        <div class="row-fluid">       
+        <div class="span5">
+            Comments
+            <div class="row-fluid">
+              <%= f.text_area :comment, :size => "120x2" %>
             </div>            
           </div>        
       </div>

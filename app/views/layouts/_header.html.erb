@@ -1,15 +1,19 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      
-      <%= link_to "Leaderboard of Awesome", '/players', id: "logo" %>
-      <nav>
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">Leaderboard of Awesome</a>
+      <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li><%= link_to "Leaderboard", '/players' %></li>
           <li><%= link_to "Games",    '/games' %></li>
           <li><%= link_to "New Game", '/games/new' %></li>
         </ul>
-      </nav>
+      </div>
     </div>
   </div>
 </header>

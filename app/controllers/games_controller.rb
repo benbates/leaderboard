@@ -11,6 +11,16 @@ class GamesController < ApplicationController
     end
   end
 
+  def admin
+    @date = ""
+    @games = Game.order("created_at desc").all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @games }
+    end
+  end
+  
   # GET /games/1
   # GET /games/1.json
   def show

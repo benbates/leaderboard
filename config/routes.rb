@@ -5,7 +5,9 @@ Leaderboard::Application.routes.draw do
 
   resources :results
 
-  resources :games
+  resources :games do
+      get 'admin', :on => :collection
+  end
 
   resources :players
 

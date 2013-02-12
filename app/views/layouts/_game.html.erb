@@ -12,13 +12,19 @@
       <% else %>
         <tr>
       <% end %>
-      <td class="span8">
-        <%= link_to player.name, player %></td>
-      <td class="span2">
-        <%= result.score %></td>     
-      </tr>
+          <td class="span8">
+            <%= link_to player.name, player %>
+          </td>
+          <td class="span2">
+            <%= result.score %>
+          </td>
+        </tr>
     <% end %>
   </table>
+  <% if @admin == true %>   
+      <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+      <%= link_to 'Show', game %>
+  <% end %>
   <% if game.comment != "" %>
     <h4>Notes:</h4>
     <p class="notes"><%= game.comment %></p>

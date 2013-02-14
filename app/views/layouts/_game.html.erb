@@ -1,7 +1,8 @@
 <% @date = "" %>
 <% @games.each do |game| %>
-  <% if game.created_at.strftime("%m/%d/%Y") != @date %>
-    <% @date = game.created_at.strftime("%m/%d/%Y") %>
+  <% @time = game.created_at.in_time_zone("Eastern Time (US & Canada)") %>
+  <% if @time.strftime("%m/%d/%Y") != @date %>
+    <% @date = @time.strftime("%m/%d/%Y") %>
     <h2><%= @date %></h2>
   <% end %>
   <table class="table table-striped table-bordered">

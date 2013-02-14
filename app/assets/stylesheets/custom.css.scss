@@ -13,6 +13,10 @@ $grayMediumLight: #eaeaea;
   max-width: 979px; /* or 950px */
 }
 
+.main-content {
+  position: relative;
+}
+
 html {
   overflow-y: scroll;
 }

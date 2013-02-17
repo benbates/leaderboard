@@ -20,11 +20,11 @@
         <% @players.each do |player| %>
           <tr>
             <td><%= link_to player.name, player %></td>
-         	  <td class="center"><%= player.win_count %></td>
- 	          <td class="center"><%= losses(player, '*') %></td>
-         	  <td class="center"><%= number_with_precision(player.win_percent, :precision => 3) %></td>
-         	  <td class="center"><%= player.points_for %></td>
-         	  <td class="center"><%= player.points_against %></td>
+         	  <td class="center"><%= win_count(player, 0) %></td>
+ 	          <td class="center"><%= losses(player, 0) %></td>
+         	  <td class="center"><%= win_percent(player, 0) %></td>
+         	  <td class="center"><%= points_for(player, 0) %></td>
+         	  <td class="center"><%= points_against(player, 0) %></td>
           </tr>
         <% end %>
       </tbody>
@@ -49,11 +49,11 @@
           <% @players.each do |player| %>
             <tr>
               <td><%= link_to player.name, player %></td>
-              <td class="center"><%= player.win_count %></td>
-              <td class="center"><%= losses(player, game_type.id) %></td>                  
-              <td class="center"><%= number_with_precision(player.win_percent, :precision => 3) %></td>
-              <td class="center"><%= player.points_for %></td>
-              <td class="center"><%= player.points_against %></td>
+              <td class="center"><%= win_count(player, @type_id) %></td>
+              <td class="center"><%= losses(player, @type_id) %></td>                  
+              <td class="center"><%= win_percent(player, @type_id) %></td>
+              <td class="center"><%= points_for(player, @type_id) %></td>
+              <td class="center"><%= points_against(player, @type_id) %></td>
             </tr>
           <% end %>
         </tbody>

@@ -2,7 +2,7 @@ module PlayersHelper
 
   def losses(player, game_type)
     if game_type == 0
-      player.results.count(:conditions => { :winner => false, :game_type_id => '*' })      
+      player.results.count(:conditions => { :winner => false })      
     else
       player.results.count(:conditions => { :winner => false, :game_type_id => game_type })
     end
@@ -12,6 +12,7 @@ module PlayersHelper
     if game_type == 0
       player.results.sum(:score)  
     else
+      player.results.sum(:score, :conditions => { :game_type_id => game_type })  
     end
   end
          
@@ -19,23 +20,34 @@ module PlayersHelper
     if game_type == 0
       Result.sum(:score, :conditions => { :opponent_id => player.id })
     else
+      Result.sum(:score, :conditions => { :opponent_id => player.id, :game_type_id => game_type })
     end
   end
   
   def win_count(player, game_type)
     if game_type == 0 
-      self.results.count(:conditions => { :winner => true })
+      player.results.count(:conditions => { :winner => true })
+    else
+      player.results.count(:conditions => { :winner => true, :game_type_id => game_type })
     end
   end
   
     
   def win_percent(player, game_type)
+    @losses = losses(player, game_type)
+    @wins = win_count(player, game_type)
     if game_type == 0
-      if self.games.count > 0 
-        self.win_count.to_f/(self.results.count(:conditions => {:winner => false}) + self.win_count)
+      if @wins > 0 
+        number_with_precision(@wins.to_f/(@losses + @wins), :precision => 3)
       else  
-        0.00
+        0.000
       end
+    else
+      if @wins > 0 
+        number_with_precision(@wins.to_f/(@losses + @wins), :precision => 3)
+      else  
+        0.000
+      end        
     end
   end
   

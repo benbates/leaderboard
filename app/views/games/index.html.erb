@@ -2,12 +2,11 @@
 <% @admin = false %>
 <%= render 'layouts/game_type_tabs' %>
 <div class="tab-content">
-  <div class="tab-pane active" id="tab1"><%= render 'layouts/game' %></div>
-  <% @game_number = 2 %>
+  <div class="tab-pane active" id="tab"><%= render 'layouts/game' %></div>
   <% GameType.all.each do | game_type | %>
+    <% @game_number = game_type.id %>
     <% @games = game_type.games.order("created_at desc") %>
     <div class="tab-pane" id="tab<%= @game_number %>"><%= render 'layouts/game' %></div>
-    <% @game_number += 1 %>
   <% end %>
 </div>
    

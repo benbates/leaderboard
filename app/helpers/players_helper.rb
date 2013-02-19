@@ -51,4 +51,24 @@ module PlayersHelper
     end
   end
   
+  def streak(player)
+    if player.results.count == 0
+      "Play a game"
+    else
+      streak_number = 0
+      streak_results = player.results.order('created_at DESC')
+      result = streak_results.first.winner 
+      streak_results.each do |streak|
+        if streak.winner != result then
+          break
+        end
+        streak_number += 1
+      end
+      if result == true
+        "Won #{streak_number}"
+      else
+        "Lost #{streak_number}"
+      end
+    end 
+  end
 end

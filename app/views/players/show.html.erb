@@ -8,15 +8,17 @@
       <th class="span2">Win %</th>
       <th class="span2">Points For</th>
       <th class="span2">Points Against</th>
+      <th class="span2">Streak</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="center"><%= @player.win_count %></td>
-      <td class="center"><%= @player.results.count(:conditions => {:winner => false}) %></td>
-      <td class="center"><%= number_with_precision(@player.win_percent, :precision => 3) %></td>      
-      <td class="center"><%= @player.points_for %></td>
-      <td class="center"><%= @player.points_against %></td>
+            <td class="center"><%= win_count(player, 0) %></td>
+            <td class="center"><%= losses(player, 0) %></td>
+            <td class="center"><%= win_percent(player, 0) %></td>
+            <td class="center"><%= points_for(player, 0) %></td>
+            <td class="center"><%= points_against(player, 0) %></td>
+            <td class="center"><%= streak(player) %></td>   
     </tr>
   </tbody>
 </table>

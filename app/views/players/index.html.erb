@@ -12,8 +12,9 @@
           <th>Wins</th>
           <th>Losses</th>
           <th>Win %</th>
-          <th>Avg Points For</th>
-          <th>Avg Points Against</th>
+          <th>Avg PF</th>
+          <th>Avg PA</th>
+          <th>Diff</th>          
           <th>Streak</th>
         </tr>
       </thead>
@@ -26,6 +27,7 @@
          	  <td class="center"><%= win_percent(player, 0) %></td>
          	  <td class="center"><%= points_for(player, 0) %></td>
          	  <td class="center"><%= points_against(player, 0) %></td>
+            <td class="center<%= diff(player, 0) > 0 ? " text-success" : " text-error" %>"><%= diff(player, 0) %></td>         	  
             <td class="center"><%= streak(player) %></td>         	  
           </tr>
         <% end %>

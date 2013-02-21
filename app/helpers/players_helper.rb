@@ -30,6 +30,10 @@ module PlayersHelper
     end
   end
   
+  def diff(player, game_type)
+    points_for(player, game_type) - points_against(player, game_type)
+  end
+  
   def win_count(player, game_type)
     if game_type == 0 
       player.results.count(:conditions => { :winner => true })

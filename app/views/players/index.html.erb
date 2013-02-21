@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>   
-        <% @players.each do |player| %>
+        <% @players.each do | player | %>
           <tr>
             <td><%= link_to player.name, player %></td>
          	  <td class="center"><%= win_count(player, 0) %></td>
@@ -56,6 +56,7 @@
               <td class="center"><%= win_percent(player, @type_id) %></td>
               <td class="center"><%= points_for(player, @type_id) %></td>
               <td class="center"><%= points_against(player, @type_id) %></td>
+              <td class="center"><%= streak(player) %></td>             
             </tr>
           <% end %>
         </tbody>

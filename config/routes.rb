@@ -1,4 +1,6 @@
 Leaderboard::Application.routes.draw do
+  get "static_pages/ladder"
+
   root to: 'players#index'
   
   resources :game_types

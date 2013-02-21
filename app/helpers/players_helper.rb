@@ -7,20 +7,26 @@ module PlayersHelper
       player.results.count(:conditions => { :winner => false, :game_type_id => game_type })
     end
   end
-    
+  
   def points_for(player, game_type)
+    games = losses(player, game_type) + win_count(player, game_type)
     if game_type == 0
-      player.results.sum(:score)  
+      points = player.results.sum(:score) 
+      points > 0 ? points/games : 0
     else
-      player.results.sum(:score, :conditions => { :game_type_id => game_type })  
+      points = player.results.sum(:score, :conditions => { :game_type_id => game_type }) 
+      points > 0 ? points/games : 0
     end
   end
          
   def points_against(player, game_type)
+    games = losses(player, game_type) + win_count(player, game_type)
     if game_type == 0
-      Result.sum(:score, :conditions => { :opponent_id => player.id })
+      points = Result.sum(:score, :conditions => { :opponent_id => player.id })
+      points > 0 ? points/games : 0
     else
-      Result.sum(:score, :conditions => { :opponent_id => player.id, :game_type_id => game_type })
+      points = Result.sum(:score, :conditions => { :opponent_id => player.id, :game_type_id => game_type })
+      points > 0 ? points/games : 0
     end
   end
   

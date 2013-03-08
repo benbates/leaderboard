@@ -11,12 +11,13 @@ $grayMediumLight: #eaeaea;
   margin-right: auto;
   margin-left: auto;
   max-width: 979px; /* or 950px */
+ margin-top: -20px;
 }
 
 .main-content {
   position: relative;
   background-color: #FFFFFF;
-  margin-top: -20px;
+  padding: 20px;
 }
 
 html {
@@ -155,6 +156,10 @@ header {
   filter: none;
   border: none;
   height: 80px;
+}
+
+.navbar-inner .container {
+  margin-top:0px;
 }
 
 .navbar-inverse .brand, .navbar-inverse .nav > li > a {

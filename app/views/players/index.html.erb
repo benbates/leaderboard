@@ -1,10 +1,4 @@
 <h1>Leaderboard</h1>
-
-<%= render 'layouts/game_type_tabs' %>
-
-
-<div class="tab-content">
-  <div class="tab-pane active" id="tab"> 
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -33,37 +27,3 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-
-  <% GameType.all.each do | game_type | %>
-    <% @type_id = game_type.id %>
-    <div class="tab-pane" id="tab<%= @type_id %>">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Win %</th>
-            <th>Points For</th>
-            <th>Points Against</th>
-          </tr>
-        </thead>
-        <tbody>  
-          <% @players.each do |player| %>
-            <tr>
-              <td><%= link_to player.name, player %></td>
-              <td class="center"><%= win_count(player, @type_id) %></td>
-              <td class="center"><%= losses(player, @type_id) %></td>                  
-              <td class="center"><%= win_percent(player, @type_id) %></td>
-              <td class="center"><%= points_for(player, @type_id) %></td>
-              <td class="center"><%= points_against(player, @type_id) %></td>
-              <td class="center"><%= streak(player) %></td>             
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-</div>
-

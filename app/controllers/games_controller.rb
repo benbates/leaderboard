@@ -67,7 +67,7 @@ class GamesController < ApplicationController
           @game.results.create! player_id: params[:player_two], winner: params[:results][:player_two_winner], 
               score: params[:results][:player_two_score], opponent_id: params[:player_one]
           @game.results.each do |result|
-            result.game_type_id = @game.game_type_id
+            result.game_type_id = 1
             result.save
           end
           format.html { redirect_to games_path, notice: 'Game successfully created.' }

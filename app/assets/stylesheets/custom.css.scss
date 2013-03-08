@@ -15,6 +15,7 @@ $grayMediumLight: #eaeaea;
 
 .main-content {
   position: relative;
+  background-color: #FFFFFF;
 }
 
 html {
@@ -22,8 +23,13 @@ html {
 }
 
 body {
+  /* background: url(cream_dust.png) repeat 0 0; */
+  background-color: #444444;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
   padding-top: 100px;
-  background: url(cream_dust.png) repeat 0 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -88,6 +94,15 @@ a {
     line-height: 25px;
     color: #098AC6;
     text-decoration: none;
+    font-weight: bold;
+    &:hover {
+    color: #31A4D9;
+    text-decoration: none;
+    background-color: transparent;
+  }
+    &:visited {
+    color: #098AC6;
+  }
 }
 
 textarea {

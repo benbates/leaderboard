@@ -22,14 +22,14 @@ class Result < ActiveRecord::Base
       self.player.win_percent = 0.00
     end
     self.player.save
-    if self.winner == true # && (self.player.ladder_pos == opponent.ladder_pos - 2 || self.player.ladder_pos == opponent.ladder_pos - 1)
-      new_pos = opponent.ladder_pos
-      old_pos = self.player.ladder_pos
-      self.player.ladder_pos = new_pos
-      opponent.ladder_pos = old_pos
-      self.player.save
-      opponent.save
-    end
+#    if self.winner == true # && (self.player.ladder_pos == opponent.ladder_pos - 2 || self.player.ladder_pos == opponent.ladder_pos - 1)
+#      new_pos = opponent.ladder_pos
+#      old_pos = self.player.ladder_pos
+#      self.player.ladder_pos = new_pos
+#      opponent.ladder_pos = old_pos
+#      self.player.save
+#      opponent.save
+#    end
   end
 
   def opponent

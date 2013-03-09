@@ -1,5 +1,6 @@
 Leaderboard::Application.routes.draw do
-  get "static_pages/ladder"
+  
+  match "ladder", to: "static_pages#ladder"
 
   root to: 'players#index'
   

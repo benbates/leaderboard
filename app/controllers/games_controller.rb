@@ -56,11 +56,17 @@ class GamesController < ApplicationController
 #    if params[:player_one] == params[:player_two]
 #      @game.errors.push("Players must be different")
 #    end
-#    if params[:results][:player_one_winner] == params[:results][:player_two_winner]
-#      @game.errors.push("Please select a winner")
-#    end
 
       respond_to do |format|
+        if params[:results][:player_one_score] > params[:results][:player_two_score]
+          params[:results][:player_one_winner] = true
+          params[:results][:player_two_winner] = false        
+        else 
+          if params[:results][:player_one_score] < params[:results][:player_two_score]
+            params[:results][:player_one_winner] = false
+            params[:results][:player_two_winner] = true
+          end
+        end
         if @game.save
           @game.results.create! player_id: params[:player_one], winner: params[:results][:player_one_winner], 
               score: params[:results][:player_one_score], opponent_id: params[:player_two]

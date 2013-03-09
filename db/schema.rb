@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221043948) do
+ActiveRecord::Schema.define(:version => 20130309201953) do
 
   create_table "game_types", :force => true do |t|
     t.string   "name"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20130221043948) do
     t.integer  "win_count",   :default => 0
     t.float    "win_percent"
     t.integer  "points_for"
-    t.integer  "ladder_rank"
     t.integer  "ladder_pos"
   end
 

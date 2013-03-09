@@ -5,10 +5,23 @@ class Result < ActiveRecord::Base
 	belongs_to :player
 
   before_save :default_values
+  before_save :order_ladder
 
   after_save :update_counter_cache
   after_destroy :update_counter_cache
-  
+
+  def order_ladder
+    if self.winner == true && (self.player.ladder_pos == opponent.ladder_pos + 2 || self.player.ladder_pos == opponent.ladder_pos + 1)
+      opp = Player.find(self.opponent_id)
+      new_pos = opp.ladder_pos
+      old_pos = self.player.ladder_pos
+      self.player.ladder_pos = new_pos
+      opp.ladder_pos = old_pos
+      self.player.save
+      opp.save
+    end
+  end  
+      
   def default_values
     self.score ||= 0
   end
@@ -22,18 +35,10 @@ class Result < ActiveRecord::Base
       self.player.win_percent = 0.00
     end
     self.player.save
-#    if self.winner == true # && (self.player.ladder_pos == opponent.ladder_pos - 2 || self.player.ladder_pos == opponent.ladder_pos - 1)
-#      new_pos = opponent.ladder_pos
-#      old_pos = self.player.ladder_pos
-#      self.player.ladder_pos = new_pos
-#      opponent.ladder_pos = old_pos
-#      self.player.save
-#      opponent.save
-#    end
   end
 
   def opponent
-    Player.find(self.opponent_id)
+    opp = Player.find(self.opponent_id)
   end
   
 end

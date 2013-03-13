@@ -58,11 +58,11 @@ class GamesController < ApplicationController
 #    end
 
       respond_to do |format|
-        if params[:results][:player_one_score] > params[:results][:player_two_score]
+        if params[:results][:player_one_score].to_i > params[:results][:player_two_score].to_i
           params[:results][:player_one_winner] = true
           params[:results][:player_two_winner] = false        
         else 
-          if params[:results][:player_one_score] < params[:results][:player_two_score]
+          if params[:results][:player_one_score].to_i < params[:results][:player_two_score].to_i
             params[:results][:player_one_winner] = false
             params[:results][:player_two_winner] = true
           end

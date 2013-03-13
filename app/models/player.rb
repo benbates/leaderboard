@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :name, :points_against, :win_count
+  attr_accessible :name, :points_against, :win_count, :ladder_pos
   
   validates :name, presence: true 
   

@@ -41,7 +41,8 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(params[:player])
+    last_ladder_player = Player.order("ladder_pos asc").last
+    @player = Player.new(params[:player].merge(:ladder_pos => last_ladder_player.ladder_pos + 1))
 
     respond_to do |format|
       if @player.save

@@ -9,6 +9,7 @@
 
 # Ignore .metadata (for Eclipse)
 /.metadata
+/RemoteSystemsTempFiles
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

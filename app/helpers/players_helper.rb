@@ -81,4 +81,10 @@ module PlayersHelper
       end
     end 
   end
+  
+  
+  def curr_streak(player)
+    curr_streak = player.results.order('created_at DESC').first.winner
+  end
+      
 end

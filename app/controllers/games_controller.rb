@@ -68,14 +68,15 @@ class GamesController < ApplicationController
           end
         end
         if @game.save
+          puts "Save Game!"
           @game.results.create! player_id: params[:player_one], winner: params[:results][:player_one_winner], 
-              score: params[:results][:player_one_score], opponent_id: params[:player_two]
+              score: params[:results][:player_one_score], opponent_id: params[:player_two], game_type_id: 1
           @game.results.create! player_id: params[:player_two], winner: params[:results][:player_two_winner], 
-              score: params[:results][:player_two_score], opponent_id: params[:player_one]
-          @game.results.each do |result|
-            result.game_type_id = 1
-            result.save
-          end
+              score: params[:results][:player_two_score], opponent_id: params[:player_one], game_type_id: 1
+          #@game.results.each do |result|
+            #result.game_type_id = 1
+            #result.save
+          #end
           format.html { redirect_to games_path, notice: 'Game successfully created.' }
           format.json { render json: @game, status: :created, location: @game }
         else

@@ -28,7 +28,7 @@ class Result < ActiveRecord::Base
           puts self.id
           puts "2 #{self.player.name}"
           self.player.ladder_stat = "defend"
-          opp.ladder_stat = ""
+          opp.ladder_stat = "deny"
           self.player.save
           opp.save
         end   

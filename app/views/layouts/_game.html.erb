@@ -5,31 +5,32 @@
     <% @date = @time.strftime("%m/%d/%Y") %>
     <h2><%= @date %></h2>
   <% end %>
+  <div class="row-fluid">
   <table class="table table-striped table-bordered">
     <% game.players.each do |player|%>
-      <% result = player.results.first(:conditions => { :game_id => game.id }) %>
-      <% if result.winner %>
-        <tr class="success">
-      <% else %>
-        <tr>
-      <% end %>
-        <td class="span8">
-          <%= link_to player.name, player %>
-        </td>
-        <td class="span2">
-          <%= result.score %>
-        </td>
-      </tr>
+        <% result = player.results.first(:conditions => { :game_id => game.id }) %>
+        <% if result.winner %>
+          <tr class="success">
+        <% else %>
+          <tr>
+        <% end %>
+          <td class="span8">
+            <%= link_to player.name, player %>
+          </td>
+          <td class="span2">
+            <%= result.score %>
+          </td>
+        </tr>
     <% end %>
   </table>
   
-  <% if @admin == true %>   
-    <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-    <%= link_to 'Show', game %>
-  <% end %>
   <% if game.comment != "" %>
     <h4>Notes:</h4>
     <p class="notes"><%= game.comment %></p>
   <% end %>
+
+  <% if @admin == true %>   
+    <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %> 
+  <% end %>
 <% end %>
-<br />
+</div>

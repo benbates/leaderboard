@@ -11,11 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="span3">
+    <%= f.label :name %>
+    <div class="row-fluid">
+      <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="actions">
+  <div class="span2">
+    Retired?
+    <div class="row-fluid">
+      <%= f.check_box :retired %>
+    </div>             
+  </div>
+
+  <div class="actions row-fluid">
     <%= f.submit %>
   </div>
 <% end %>

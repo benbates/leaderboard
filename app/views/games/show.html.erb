@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Type:</b>
-  <%= @game.game_type.name %>
-</p>
-
+<%= render 'form' %>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

@@ -12,7 +12,9 @@ Leaderboard::Application.routes.draw do
       get 'admin', :on => :collection
   end
 
-  resources :players
+  resources :players do
+    get 'list', :on => :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

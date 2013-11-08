@@ -10,6 +10,16 @@ class PlayersController < ApplicationController
     end
   end
 
+    # GET /players.json
+  def list
+    @players = Player.all(:order => 'win_percent IS NULL, win_percent DESC, win_count DESC, points_for DESC')
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @players }
+    end
+  end
+
   # GET /players/1
   # GET /players/1.json
   def show

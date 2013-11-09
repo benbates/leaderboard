@@ -18,10 +18,10 @@
           <div class="span3">
             Player
             <div class="row-fluid">
-              <%= select_tag :player_one, options_from_collection_for_select(Player.all(:order => :name), :id, :name) %>
+              <%= select_tag :player_one, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
             </div>
             <div class="row-fluid">
-              <%= select_tag :player_two, options_from_collection_for_select(Player.all(:order => :name), :id, :name) %>
+              <%= select_tag :player_two, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
             </div>
           </div>
           <div class="span3">
@@ -47,7 +47,7 @@
         <%= fields_for :results do |d| %>
         <div class="span12">            
             <div class="row-fluid">
-              Name: <%= select_tag :player_one, options_from_collection_for_select(Player.all, :id, :name) %>
+              Name: <%= select_tag :player_one, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
             </div>
             <div class="row-fluid">            
               Score: <%= d.number_field :player_one_score %>
@@ -55,7 +55,7 @@
           </div>
           <div class="span12">                                                                
             <div class="row-fluid">
-              Name: <%= select_tag :player_two, options_from_collection_for_select(Player.all, :id, :name) %>
+              Name: <%= select_tag :player_two, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
             </div>
             <div class="row-fluid">
               Score: <%= d.number_field :player_two_score %>

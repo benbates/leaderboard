@@ -77,7 +77,7 @@ class GamesController < ApplicationController
             #result.game_type_id = 1
             #result.save
           #end
-          format.html { redirect_to games_path, notice: 'Game successfully created.' }
+          format.html { redirect_to "/ladder", notice: 'Game successfully created.' }
           format.json { render json: @game, status: :created, location: @game }
         else
           format.html { render action: "new" }

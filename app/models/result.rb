@@ -11,28 +11,52 @@ class Result < ActiveRecord::Base
       
   def order_ladder
     if self.winner == true
-      opp = Player.find(self.opponent_id) 
-      if self.player.ladder_pos.between?(opponent.ladder_pos, opponent.ladder_pos + 2)
-        puts self.id
-        puts "1 #{self.player.name}"
-        new_pos = opp.ladder_pos
-        old_pos = self.player.ladder_pos
-        self.player.ladder_pos = new_pos
-        opp.ladder_pos = old_pos
-        self.player.ladder_stat = "up"
-        opp.ladder_stat = "down"
-        self.player.save
-        opp.save
-      else
-        if (self.player.ladder_pos == opponent.ladder_pos - 2 || self.player.ladder_pos == opponent.ladder_pos - 1)
-          puts self.id
-          puts "2 #{self.player.name}"
-          self.player.ladder_stat = "defend"
-          opp.ladder_stat = "deny"
-          self.player.save
-          opp.save
-        end   
-      end   
+      distance = 0
+      ladder_count = opponent.ladder_pos
+      while distance < 2
+        potential = Player.where(:ladder_pos => ladder_count += 1).first
+        puts "In the first loop"
+        if potential.retired != true
+          puts "In the second loop"
+          if potential == self.player
+            puts "In the third loop"
+            puts self.id
+            puts "1 #{self.player.name}"
+            new_pos = opponent.ladder_pos
+            puts "New Position = #{new_pos}"
+            old_pos = self.player.ladder_pos
+            puts "Old Position = #{old_pos}"
+            self.player.ladder_pos = new_pos
+            opponent.ladder_pos = old_pos
+            self.player.ladder_stat = "up"
+            opponent.ladder_stat = "down"
+            self.player.save
+            opponent.save
+            swap = true
+          end
+          distance += 1
+        end
+      end
+      if !swap
+      distance = 0
+      ladder_count = opponent.ladder_pos
+        while distance < 2 && ladder_count != 0
+          puts "Ladder Count = #{ladder_count}"
+          potential = Player.where(:ladder_pos => ladder_count).first        
+          if potential.retired != true
+            if potential == self.player
+              puts self.id
+              puts "2 #{self.player.name}"
+              self.player.ladder_stat = "defend"
+              opponent.ladder_stat = "deny"
+              self.player.save
+              opponent.save
+            end
+            distance += 1
+            ladder_count -= 1
+          end   
+        end
+      end
     end
   end  
   
@@ -55,5 +79,36 @@ class Result < ActiveRecord::Base
   def opponent
     opp = Player.find(self.opponent_id)
   end
+
+  def upper_distance
+
+  end
+
+  def lower_distance
+
+  end
   
 end
+
+
+#     if self.player.ladder_pos.between?(opponent.ladder_pos, opponent.ladder_pos + 2)
+#       puts self.id
+#       puts "1 #{self.player.name}"
+#       new_pos = opp.ladder_pos
+#       old_pos = self.player.ladder_pos
+#       self.player.ladder_pos = new_pos
+#       opp.ladder_pos = old_pos
+#       self.player.ladder_stat = "up"
+#       opp.ladder_stat = "down"
+#       self.player.save
+#       opp.save
+#     else
+#         if (self.player.ladder_pos == opponent.ladder_pos-2 || self.player.ladder_pos == opponent.ladder_pos-1)
+#         puts self.id
+#         puts "2 #{self.player.name}"
+#         self.player.ladder_stat = "defend"
+#         opp.ladder_stat = "deny"
+#           self.player.save
+#           opp.save
+#         end
+#       end

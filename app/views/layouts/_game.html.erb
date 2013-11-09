@@ -24,7 +24,8 @@
       <% end %>
 
       <% if @admin == true %>   
-        <tr><td colspan=2><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td></tr> 
+        <tr><td colspan=2><%= link_to 'Delete', game, method: :delete, 
+                                                      confirm: 'Are you sure?' %></td></tr> 
       <% end %>
     </table>
     
@@ -35,4 +36,3 @@
 
   </div>
 <% end %>
-</div>

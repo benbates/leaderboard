@@ -12,7 +12,7 @@ class PlayersController < ApplicationController
 
     # GET /players.json
   def list
-    @players = Player.all(:order => 'win_percent IS NULL, win_percent DESC, win_count DESC, points_for DESC')
+    @players = Player.all(:order => 'name ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -87,6 +87,17 @@ class PlayersController < ApplicationController
       end
     end
   end
+
+  # PUT /players
+  # PUT /players
+  def update_multiple
+
+    Player.update(params[:player].keys, params[:player].values)
+    flash[:notice] = 'Players successfully updated'
+    redirect_to :action => "list"
+
+  end
+
 
   # DELETE /players/1
   # DELETE /players/1.json

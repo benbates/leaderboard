@@ -1,5 +1,18 @@
-  <% @players.each do | player | %>
-    <div class="span3">
-      <%= player.name %>
-    </div>  
+  <div class="row">
+    <div class="span3"><h4>Name</h4></div>
+    <div class="span1"><h4>Retired?</h4></div>
+  </div>
+  <%= form_for :player, :url => {:action => 'update_multiple'} do -%>
+
+    <% @players.each do | player | %>
+      <%= fields_for "player[]", player do | player_fields | %>
+          <div class="row">
+            <div class="span3"><%= player_fields.text_field :name %></div>
+            <div class="span1"><%= player_fields.check_box :retired %></div>
+            <div class="span1"><%= link_to "Show", player %></div>
+            <div class="span1"><%= link_to "Edit", edit_player_path(player.id) %></div>
+          </div>
+      <% end %> 
+    <% end %>
+    <%= submit_tag 'Update' %>
   <% end %>

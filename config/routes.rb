@@ -14,6 +14,7 @@ Leaderboard::Application.routes.draw do
 
   resources :players do
     get 'list', :on => :collection
+    post 'update_multiple', :on => :collection
   end
 
   # The priority is based upon order of creation:

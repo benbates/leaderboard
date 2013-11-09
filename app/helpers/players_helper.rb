@@ -1,63 +1,28 @@
 module PlayersHelper
-
-  def losses(player, game_type)
-    if game_type == 0
-      player.results.count(:conditions => { :winner => false })      
-    else
-      player.results.count(:conditions => { :winner => false, :game_type_id => game_type })
-    end
-  end
   
-  def points_for(player, game_type)
-    games = losses(player, game_type) + win_count(player, game_type)
-    if game_type == 0
-      points = player.results.sum(:score) 
-      points > 0 ? points/games : 0
-    else
-      points = player.results.sum(:score, :conditions => { :game_type_id => game_type }) 
-      points > 0 ? points/games : 0
-    end
+  def points_for(player)
+    points = player.points_for
+    points > 0 ? points/total_games(player) : 0
   end
          
-  def points_against(player, game_type)
-    games = losses(player, game_type) + win_count(player, game_type)
-    if game_type == 0
-      points = Result.sum(:score, :conditions => { :opponent_id => player.id })
-      points > 0 ? points/games : 0
-    else
-      points = Result.sum(:score, :conditions => { :opponent_id => player.id, :game_type_id => game_type })
-      points > 0 ? points/games : 0
-    end
+  def points_against(player)
+    points = player.points_against
+    points > 0 ? points/total_games(player) : 0
+  end
+
+  def total_games(player)
+    player.win_count + player.loss_count
   end
   
-  def diff(player, game_type)
-    points_for(player, game_type) - points_against(player, game_type)
+  def diff(player)
+    points_for(player) - points_against(player)
   end
-  
-  def win_count(player, game_type)
-    if game_type == 0 
-      player.results.count(:conditions => { :winner => true })
-    else
-      player.results.count(:conditions => { :winner => true, :game_type_id => game_type })
-    end
-  end
-  
     
-  def win_percent(player, game_type)
-    @losses = losses(player, game_type)
-    @wins = win_count(player, game_type)
-    if game_type == 0
-      if @wins > 0 
-        number_with_precision(@wins.to_f/(@losses + @wins), :precision => 3)
-      else  
-        0.000
-      end
-    else
-      if @wins > 0 
-        number_with_precision(@wins.to_f/(@losses + @wins), :precision => 3)
-      else  
-        0.000
-      end        
+  def win_percent(player)
+    if player.win_count > 0 
+      number_with_precision(player.win_count.to_f/(player.loss_count + player.win_count), :precision => 3)
+    else  
+      0.000
     end
   end
   
@@ -81,7 +46,6 @@ module PlayersHelper
       end
     end 
   end
-  
   
   def curr_streak(player)
     curr_streak = player.results.order('created_at DESC').first.winner

@@ -17,12 +17,12 @@
           <% if player.is_not_retired %>
           <tr>
             <td><%= link_to player.name, player %></td>
-            <td class="center"><%= win_count(player, 0) %></td>
-            <td class="center"><%= losses(player, 0) %></td>
-            <td class="center"><%= win_percent(player, 0) %></td>
-            <td class="center"><%= points_for(player, 0) %></td>
-            <td class="center"><%= points_against(player, 0) %></td>
-            <td class="center<%= diff(player, 0) > 0 ? " text-success" : " text-error" %>"><%= diff(player, 0) %></td>         	  
+            <td class="center"><%= player.win_count %></td>
+            <td class="center"><%= player.loss_count %></td>
+            <td class="center"><%= number_with_precision(player.win_percent, :precision => 3) %></td>
+            <td class="center"><%= points_for(player) %></td>
+            <td class="center"><%= points_against(player) %></td>
+            <td class="center<%= diff(player) > 0 ? " text-success" : " text-error" %>"><%= diff(player) %></td>         	  
             <td class="center<%= curr_streak(player) == true ? " text-success" : " text-error" %>"><%= streak(player) %></td>         	  
           </tr>
           <% end %>

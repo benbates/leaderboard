@@ -36,9 +36,11 @@ class Result < ActiveRecord::Base
 
   def update_counter_cache
     self.player.win_count = Result.count(:conditions => ["winner = ? AND player_id = ?", true, self.player.id])
+    self.player.loss_count = Result.count(:conditions => ["winner != ? AND player_id = ?", true, self.player.id])    
     self.player.points_for = self.player.results.sum(:score)
+    self.player.points_against = Result.sum(:score, :conditions => { :opponent_id => self.player.id })
     if self.player.games.count > 0
-      self.player.win_percent = self.player.win_count.to_f/(self.player.results.count(:conditions => {:winner => false}) + player.win_count)
+      self.player.win_percent = self.player.win_count.to_f/(self.player.loss_count + self.player.win_count)
     else
       self.player.win_percent = 0.00
     end

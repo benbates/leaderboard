@@ -24,6 +24,7 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @player = Player.find(params[:id])
+    @relationships = @player.relationships.order("win_percent DESC, win_count DESC, loss_count DESC, points_for DESC")
     @games = @player.games.paginate(page: params[:page]).order("created_at DESC")
     # @games = @player.games.order("created_at desc")
 

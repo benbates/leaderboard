@@ -6,8 +6,8 @@ class Result < ActiveRecord::Base
 
   before_save :default_values, :order_ladder
 
-  after_save :update_counter_cache
-  after_destroy :update_counter_cache
+  after_save :update_counter_cache, :update_relationship
+  after_destroy :update_counter_cache, :update_relationship
       
   def order_ladder
     if self.winner == true
@@ -45,6 +45,37 @@ class Result < ActiveRecord::Base
       self.player.win_percent = 0.00
     end
     self.player.save
+  end
+
+  def update_relationship
+
+    opponent = Player.find(self.opponent_id)
+    total_games = self.player.results.where(:opponent_id => self.opponent_id).count
+    win_count =  self.player.results.where(:opponent_id => self.opponent_id,  :winner => true).count
+    loss_count = total_games - win_count
+    points_for = self.player.results.where(:opponent_id => self.opponent_id).sum(:score)
+    points_against = Result.where(:player_id => self.opponent_id, :opponent_id => self.player.id).sum(:score)
+    if win_count > 0
+      win_percent = (win_count.to_f/(loss_count + win_count))
+    else  
+      win_percent = 0.000
+    end
+    if Relationship.where(:player_id => self.player.id, :opponent_id => self.opponent_id).count == 1
+      relationship = Relationship.where(:player_id => self.player.id, :opponent_id => opponent_id).first
+      relationship.update_attributes :win_count => win_count,
+                          :loss_count => loss_count,
+                          :points_for => points_for,
+                          :points_against => points_against,
+                          :win_percent => win_percent
+    else
+      Relationship.create :player_id => player.id,
+                          :opponent_id => opponent.id,
+                          :win_count => win_count,
+                          :loss_count => loss_count,
+                          :points_for => points_for,
+                          :points_against => points_against,
+                          :win_percent => win_percent
+    end
   end
 
   def opponent

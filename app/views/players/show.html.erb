@@ -37,7 +37,7 @@
   </thead>
   <tbody>
     <% @relationships.each do | relationship | %>
-      <% if Player.find(relationship.opponent_id).is_not_retired %>
+      <% if Player.find(relationship.opponent_id).is_not_retired && ( relationship.win_count + relationship.loss_count > 0 ) %>
       <tr>
         <td class="center"><%= link_to Player.find(relationship.opponent_id).name, "/players/#{relationship.opponent_id}" %></td>
         <td class="center"><%= relationship.win_count %></td>

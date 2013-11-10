@@ -24,7 +24,8 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @player = Player.find(params[:id])
-    @games = @player.games.order("created_at desc")
+    @games = @player.games.paginate(page: params[:page]).order("created_at DESC")
+    # @games = @player.games.order("created_at desc")
 
     respond_to do |format|
       format.html # show.html.erb

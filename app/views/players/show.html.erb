@@ -24,6 +24,35 @@
   </tbody>
 </table>
 
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th class="span2">Opponent Name</th>
+      <th class="span2">Wins</th>
+      <th class="span2">Losses</th>
+      <th class="span2">Win %</th>
+      <th class="span2">Avg Points For</th>
+      <th class="span2">Avg Points Against</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @player.relationships.order("win_percent DESC").each do | relationship | %>
+    <tr>
+      <td class="center"><%= Player.find(relationship.opponent_id).name %></td>
+      <td class="center"><%= relationship.win_count %></td>
+      <td class="center"><%= relationship.loss_count %></td>
+      <td class="center"><%= number_with_precision(relationship.win_percent, :precision => 3) %></td>
+      <td class="center"><%= relationship.points_for/(relationship.win_count + relationship.loss_count) %></td>
+      <td class="center"><%= relationship.points_against/(relationship.win_count + relationship.loss_count) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @games %>
+
 <%= render 'layouts/game' %>    
+
+<%= will_paginate @games %>
 
 <%= link_to 'Back', players_path %>

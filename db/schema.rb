@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109143505) do
+ActiveRecord::Schema.define(:version => 20131110030620) do
 
   create_table "game_types", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20131109143505) do
     t.boolean  "retired"
     t.integer  "loss_count"
     t.integer  "points_against"
+  end
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "opponent_id"
+    t.integer  "win_count"
+    t.integer  "loss_count"
+    t.integer  "points_for"
+    t.integer  "points_against"
+    t.float    "win_percent"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 # Could not dump table "results" because of following StandardError

@@ -4,7 +4,8 @@ class Player < ActiveRecord::Base
   validates :name, presence: true 
   
 	has_many :games, :through => :results
-  has_many :results
+  has_many :results 
+  has_many :relationships
   after_initialize :init
 
   def init

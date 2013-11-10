@@ -1,4 +1,4 @@
-class AddLossesPointsForAndPointsAgainstToPlayers < ActiveRecord::Migration
+class AddLossesPointsAgainstToPlayers < ActiveRecord::Migration
   def up
     add_column :players, :loss_count, :int
     add_column :players, :points_against, :int

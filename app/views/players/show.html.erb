@@ -23,7 +23,6 @@
 <%= link_to 'Back', players_path %>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('a[href="' + window.location.hash + '"]').click()
-  });
+  $(function () { var a = $('[href=' + location.hash + ']'); a && a.tab('show'); });
+  $('.nav a').on('shown', function (e) { window.location = "#top"; })
 </script>

@@ -1,0 +1,31 @@
+<div class="row-fluid hidden-phone">
+  <%= form_for(@game) do |f| %>
+    <%= fields_for :results do |d| %>
+      <div class="hidden-phone span12">
+        <div class="row-fluid">
+          <div class="span3">
+            Player
+            <div class="row-fluid">
+              <%= select_tag :player_one, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
+            </div>
+            <div class="row-fluid">
+              <%= select_tag :player_two, options_from_collection_for_select(Player.where(:retired => !true).order(:name), :id, :name) %>
+            </div>
+          </div>
+          <div class="span3">
+            Score
+            <div class="row-fluid">
+              <%= d.number_field :player_one_score %>
+            </div>
+            <div class="row-fluid">
+              <%= d.number_field :player_two_score %>
+            </div>
+          </div>  
+        </div>
+      </div>
+    <% end %>
+    <div class="actions span2">
+      <%= f.submit %>
+    </div> 
+  <% end %>
+</div>

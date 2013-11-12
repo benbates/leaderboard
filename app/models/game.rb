@@ -7,4 +7,10 @@ class Game < ActiveRecord::Base
 	belongs_to :game_type
 	scope :ordered, :order => 'created_date'
 
+  after_save :update_relationships
+
+  def update_relationships
+    puts "After Save Game"
+  end
+
 end

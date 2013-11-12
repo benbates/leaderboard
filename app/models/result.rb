@@ -45,6 +45,7 @@ class Result < ActiveRecord::Base
       self.player.win_percent = 0.00
     end
     self.player.save
+    puts "After Result Save"
   end
 
   def update_relationship

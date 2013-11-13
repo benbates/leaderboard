@@ -142,6 +142,15 @@ header {
   height: 80px;
 }
 
+.navbar-inverse .btn-navbar {
+  background-color: #31A4D9; 
+  background-image: none;
+  margin-top: 20px;
+      &:hover {
+      background-color: #098AC6; 
+  }
+}
+
 .navbar-inner .container {
   margin-top:0px;
 }

@@ -48,7 +48,11 @@ module PlayersHelper
   end
   
   def curr_streak(player)
-    curr_streak = player.results.order('created_at DESC').first.winner
+    if player.results.count == 0
+      curr_streak = false
+    else
+      curr_streak = player.results.order('created_at DESC').first.winner
+    end
   end
 
   def initialize_relationships

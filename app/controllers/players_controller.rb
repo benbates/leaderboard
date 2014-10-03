@@ -2,7 +2,9 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all(:order => 'win_percent IS NULL, win_percent DESC, win_count DESC, points_for DESC')
+#    @players = Player.all(:order => 'win_percent IS NULL, win_percent DESC, win_count DESC, points_for DESC')
+    @players = Player.order(sort_column + " " + sort_direction)
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -54,13 +56,13 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
     @player = Player.new(params[:player])
-    
+
     lastLadderPlayer = Player.order('ladder_pos desc').first
     ladder_pos = 1
     if(lastLadderPlayer)
     	ladder_pos = lastLadderPlayer.ladder_pos + 1
     end
-    
+
     @player.ladder_pos = ladder_pos
 
     respond_to do |format|
@@ -112,5 +114,15 @@ class PlayersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  private
+
+  def sort_column
+    Product.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

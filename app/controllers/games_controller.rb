@@ -23,7 +23,7 @@ class GamesController < ApplicationController
       format.json { render json: @games }
     end
   end
-  
+
   # GET /games/1
   # GET /games/1.json
   def show
@@ -54,13 +54,15 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(params[:game])  
+    @game = Game.new(params[:game])
+    puts params[:game]
+    @game.game_type_id = params[:game_type_id]
 
       respond_to do |format|
         if params[:results][:player_one_score].to_i > params[:results][:player_two_score].to_i
           params[:results][:player_one_winner] = true
-          params[:results][:player_two_winner] = false        
-        else 
+          params[:results][:player_two_winner] = false
+        else
           if params[:results][:player_one_score].to_i < params[:results][:player_two_score].to_i
             params[:results][:player_one_winner] = false
             params[:results][:player_two_winner] = true
@@ -68,12 +70,13 @@ class GamesController < ApplicationController
         end
         if @game.save
           puts "Save Game!"
-          @game.results.create! player_id: params[:player_one], winner: params[:results][:player_one_winner], 
-              score: params[:results][:player_one_score], opponent_id: params[:player_two], game_type_id: 1
-          @game.results.create! player_id: params[:player_two], winner: params[:results][:player_two_winner], 
-              score: params[:results][:player_two_score], opponent_id: params[:player_one], game_type_id: 1
-           puts "After save everything"   
-          format.html { redirect_to "/ladder", notice: 'Game successfully created.' }
+          @game.update_attributes(params[:game_type])
+          @game.results.create! player_id: params[:player_one], winner: params[:results][:player_one_winner],
+              score: params[:results][:player_one_score], opponent_id: params[:player_two]
+          @game.results.create! player_id: params[:player_two], winner: params[:results][:player_two_winner],
+              score: params[:results][:player_two_score], opponent_id: params[:player_one]
+           puts "After save everything"
+          format.html { redirect_to "/", notice: 'Game successfully created.' }
           format.json { render json: @game, status: :created, location: @game }
         else
           format.html { render action: "new" }
@@ -81,7 +84,7 @@ class GamesController < ApplicationController
         end
       end
     end
-  
+
 
   # PUT /games/1
   # PUT /games/1.json

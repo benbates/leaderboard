@@ -52,7 +52,15 @@ ActiveRecord::Schema.define(:version => 20131110030620) do
     t.datetime "updated_at",     :null => false
   end
 
-# Could not dump table "results" because of following StandardError
-#   Unknown type 'id' for column 'opponent_id'
+  create_table "results", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "winner"
+    t.integer  "score"
+    t.integer  "opponent_id"
+    t.integer  "game_type_id"
+  end
 
 end

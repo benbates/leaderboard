@@ -4,8 +4,6 @@
       <th class="span2">Wins</th>
       <th class="span2">Losses</th>
       <th class="span2">Win %</th>
-      <th class="span2">Avg Points</th>
-      <th class="span2">Avg Opp Points</th>
       <th class="span2">Streak</th>
     </tr>
   </thead>
@@ -14,8 +12,6 @@
       <td class="center"><%= @player.win_count %></td>
       <td class="center"><%= @player.loss_count %></td>
       <td class="center"><%= win_percent(@player) %></td>
-      <td class="center"><%= points_for(@player) %></td>
-      <td class="center"><%= points_against(@player) %></td>
       <td class="center"><%= streak(@player) %></td>
     </tr>
   </tbody>

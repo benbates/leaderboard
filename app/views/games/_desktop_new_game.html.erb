@@ -20,15 +20,24 @@
             <div class="row-fluid">
               <%= d.number_field :player_two_score %>
             </div>
-          </div>  
+          </div>
+        </div>
+        <div class="row-fluid">
+          Game
+          <div class="row-fluid">
+            <%= select_tag :game_type_id, options_from_collection_for_select(GameType.order(:name), :id, :name) %>
+          </div>
         </div>
       </div>
     <% end %>
     <div class="actions span2">
-      <%= f.submit %>  
-    </div> 
+      <%= f.submit %>
+    </div>
     <div class="span2">
       <%= link_to 'New Player', new_player_path %>
+    </div>
+    <div class="span2">
+      <%= link_to 'New Game Type', new_game_type_path %>
     </div>
   <% end %>
 </div>
